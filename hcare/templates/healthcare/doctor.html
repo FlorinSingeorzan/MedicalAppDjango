@@ -1,0 +1,52 @@
+{% extends 'healthcare/base.html' %}
+
+{% block body %}
+    {% if messages  %}
+        {% for message in messages %}
+             <div class="col-sm-12" >
+                 <div class="form-group ">
+                     <div class="col-sm-4" >
+                        <label class="control-label " for="id_username">
+                             You have a message from: {{ message.sender }}
+                        </label>
+                     </div>
+                     <div class="col-sm-10">
+                         <input id="id_username" maxlength="1000" name="username" type="text" value="{{ message.message }}" disabled>
+                     </div>
+                     <br>
+                    <br>
+                    <br>
+                    <form class="form-horizontal" role="form" action="{% url 'respond' %}" method="post" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="message">Respond:</label>
+                            <div class="col-sm-12">
+                            <textarea class="form-control" rows="12" id="message" name="message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <div class="col-sm-10">
+                                <input  name="date" id="date" value="{% now 'Y-d-m' %}">
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                             <div class="col-sm-10">
+                                <input id="receiver" name="receiver" value="{{ message.sender }}">
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-11 col-sm-10">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                 </div>
+                 <br>
+                 <br>
+                 <br>
+             </div>
+        {% endfor %}
+    {% else %}
+        <h2>You don't have any new messages</h2>
+    {% endif %}
+{% endblock%}

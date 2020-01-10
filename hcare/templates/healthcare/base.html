@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+    <!-- Custom scripts for this page-->
+    <script src="{% static 'js/sb-admin-datatables.min.js' %}"></script>
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% if hdoc %}
+                 <a class="navbar-brand" href="{% url 'messages' %}">Home</a>
+            {% else %}
+                {% if hom %}
+                    <a class="navbar-brand" href="{% url 'user' %}">Home</a>
+                {% else %}
+                    <a class="navbar-brand" href="{% url 'login_user' %}">Home</a>
+                {% endif %}
+            {% endif %}
+            <ul class="nav navbar-nav">
+            <li class="">
+                <a href="{% url 'feed' %}" >
+                    <span class="glyphicon glyphicon-comment"></span>&nbsp Mesaje
+                </a>
+            </li>
+
+        </ul>
+        </div>
+
+        <form class="navbar-form navbar-left" role="search" method="get" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" name="q" value="">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="">
+                <a href="{% url 'logout_user' %}" >
+                    <span class="glyphicon glyphicon-off"></span>Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
